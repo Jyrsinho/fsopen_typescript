@@ -66,4 +66,15 @@ describe('exerciseCalculator', () => {
             expect(result.rating).toBe(3)
         })
     })
+    describe('average', () => {
+        test('should return zero for empty array', () => {
+            const result = exerciseCalculator.calculateExercises([])
+            expect(result.average).toBe(0)
+        })
+        test('should return the value of single instance in an array', () => {
+            const exerciseArray = [1]
+            const result = exerciseCalculator.calculateExercises([])
+            expect(result.average).toBe(1)
+        })
+    })
 })
