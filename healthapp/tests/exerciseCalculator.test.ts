@@ -29,5 +29,20 @@ describe('exerciseCalculator', () => {
             const result = exerciseCalculator.calculateExercises([])
             expect(result.success).toBe(false)
         })
+        test('should be false when less training days than original target', () => {
+            const exerciseArray = [1, 0, 2, 3, 0]
+            const result = exerciseCalculator.calculateExercises(exerciseArray)
+            expect(result.success).toBe(false)
+        })
+        test('should be true when as many training days as original target', () => {
+            const exerciseArray = [1, 2, 3, 4]
+            const result = exerciseCalculator.calculateExercises(exerciseArray)
+            expect(result.success).toBe(true)
+        })
+        test('should be true when more training days than original target', () => {
+            const exerciseArray = [1, 2, 3, 4,5]
+            const result = exerciseCalculator.calculateExercises(exerciseArray)
+            expect(result.success).toBe(true)
+        })
     })
 })

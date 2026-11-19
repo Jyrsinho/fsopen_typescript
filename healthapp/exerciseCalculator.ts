@@ -16,10 +16,12 @@ const countTrainingDays = (exercises: number[]): number => {
 }
 
 const calculateExercises = (exercises: number[]): Result => {
+    const trainingDays = countTrainingDays(exercises)
+
     return {
         periodLength: exercises.length,
-        trainingDays: countTrainingDays(exercises),
-        success: true,
+        trainingDays: trainingDays,
+        success: trainingDays >= ORIGINAL_TARGET,
         rating: 2,
         ratingDescription: 'OK',
         target: ORIGINAL_TARGET,
