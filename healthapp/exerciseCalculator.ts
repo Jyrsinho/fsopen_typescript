@@ -1,3 +1,5 @@
+const ORIGINAL_TARGET = 4
+
 interface Result  {
     periodLength: number,
     trainingDays: number,
@@ -9,14 +11,20 @@ interface Result  {
 
 }
 
+const countTrainingDays = (exercises: number[]): number => {
+    return exercises.filter( (e) => e > 0).length
+}
+
 const calculateExercises = (exercises: number[]): Result => {
     return {
-        periodLength: 7,
-        trainingDays: 7,
+        periodLength: exercises.length,
+        trainingDays: countTrainingDays(exercises),
         success: true,
         rating: 2,
         ratingDescription: 'OK',
-        target: 4,
+        target: ORIGINAL_TARGET,
         average: 3
     }
 }
+
+export default { calculateExercises }
