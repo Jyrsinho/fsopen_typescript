@@ -7,11 +7,11 @@ const evaluateBmi = (BMI: number) : BMIEvaluation => {
     return 'Obese'
 }
 
-const calculateBmi = (height: number, weight: number) : BMIEvaluation => {
+const calculateBmi = (height: number, weight: number) : string=> {
     const heightInMetres = height / 100
     const BMI = weight / (heightInMetres * heightInMetres)
     console.log(BMI)
-    return evaluateBmi(BMI)
+    return `${evaluateBmi(BMI)} range`
 };
 
 console.log(calculateBmi(180, 74))
