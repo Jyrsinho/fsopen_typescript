@@ -45,4 +45,25 @@ describe('exerciseCalculator', () => {
             expect(result.success).toBe(true)
         })
     })
+    describe('rating', () => {
+        test('should return one for empty array', () => {
+            const result = exerciseCalculator.calculateExercises([])
+            expect(result.rating).toBe(1)
+        })
+        test('should return one when less training days than original target', () => {
+            const exerciseArray = [1, 2, 3]
+            const result = exerciseCalculator.calculateExercises(exerciseArray)
+            expect(result.rating).toBe(1)
+        })
+        test('should return 2 when as many training days as original target', () => {
+            const exerciseArray = [1, 2, 3, 4]
+            const result = exerciseCalculator.calculateExercises(exerciseArray)
+            expect(result.rating).toBe(2)
+        })
+        test('should return 3 when more training days than original target', () => {
+            const exerciseArray = [1, 2, 3, 4,5]
+            const result = exerciseCalculator.calculateExercises(exerciseArray)
+            expect(result.rating).toBe(3)
+        })
+    })
 })
