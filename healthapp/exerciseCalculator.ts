@@ -1,4 +1,4 @@
-const ORIGINAL_TARGET = 4
+let ORIGINAL_TARGET: number = 0;
 
 interface Result  {
     periodLength: number,
@@ -34,6 +34,10 @@ function generateRatingDescription(rating: 1 | 2 | 3): string {
     }
 }
 
+const setOriginalTarget = (originalTarget: number) => {
+    ORIGINAL_TARGET = originalTarget
+}
+
 const calculateExercises = (exercises: number[]): Result => {
     const trainingDays = countTrainingDays(exercises)
     const rating = analyzeRating(trainingDays)
@@ -52,13 +56,23 @@ const calculateExercises = (exercises: number[]): Result => {
 }
 
 function parseArguments(argv: string[]) : number[] {
-    const parsedArray = argv.slice(2)
+    if (argv.length < 3) {
+        throw new Error('Too few arguments')
+    }
+    ORIGINAL_TARGET = Number(argv[2])
+    if (isNaN(ORIGINAL_TARGET)) {
+        throw new Error('target must be a number')
+    }
+    setOriginalTarget(ORIGINAL_TARGET)
+
+    const parsedArray = argv.slice(3)
     const hasNonNumbers = parsedArray.some((value) => {
         return isNaN(Number(value))
     })
     if (hasNonNumbers) {
-        throw new Error('exercise must be a number')
+        throw new Error('exercises must be numbers')
     }
+    ORIGINAL_TARGET = Number(argv[2])
     return parsedArray.map(value => parseInt(value))
 }
 
@@ -73,4 +87,5 @@ try {
 export default {
     calculateExercises,
     parseArguments,
+    setOriginalTarget,
 }

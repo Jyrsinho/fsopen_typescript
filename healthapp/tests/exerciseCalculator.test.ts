@@ -1,4 +1,4 @@
-import {expect, test, describe} from 'vitest'
+import {expect, test, describe, beforeEach} from 'vitest'
 import exerciseCalculator from '../exerciseCalculator'
 
 describe('exerciseCalculator', () => {
@@ -25,6 +25,10 @@ describe('exerciseCalculator', () => {
         })
     })
     describe('success when original target is 4', () => {
+        beforeEach( () => {
+                exerciseCalculator.setOriginalTarget(4)
+            }
+        )
         test('should be false when no training days', () => {
             const result = exerciseCalculator.calculateExercises([])
             expect(result.success).toBe(false)
@@ -83,25 +87,37 @@ describe('exerciseCalculator', () => {
         })
     })
     describe('parseArguments', () => {
-        test('should return array of one exercise when given one exercise', () => {
-            const args = ['node', 'path', '1']
-            const result = exerciseCalculator.parseArguments(args)
-            expect(result).toStrictEqual([1])
+        describe('when given valid input', () => {
+            test('should return array of one exercise when given one exercise', () => {
+                const args = ['node', 'path', '4', '1']
+                const result = exerciseCalculator.parseArguments(args)
+                expect(result).toStrictEqual([1])
+            })
+            test('should return an array of two exercises', () => {
+                const args = ['node', 'path', '4', '1', "2"]
+                const result = exerciseCalculator.parseArguments(args)
+                expect(result).toStrictEqual([1, 2])
+            })
+            test('should return an array of multiple exercises', () => {
+                    const args = ['node', 'path', '4', '1', '2', '3', '4', '5']
+                    const result = exerciseCalculator.parseArguments(args)
+                    expect(result).toStrictEqual([1, 2, 3, 4, 5])
+                }
+            )
         })
-        test('should return an array of two exercises', () => {
-            const args = ['node', 'path', '1', "2"]
-            const result = exerciseCalculator.parseArguments(args)
-            expect(result).toStrictEqual([1,2])
+        describe('when given invalid input', () => {
+            test('should throw an error when not given a target', () => {
+                const args = ['node', 'path']
+                expect( () => exerciseCalculator.parseArguments(args)).toThrow('Too few arguments')
+            })
+            test('should throw an error when target is not a number', () => {
+                const args = ['node', 'path', 'hummus']
+                expect( () => exerciseCalculator.parseArguments(args)).toThrow('target must be a number')
+            })
+            test('should throw an error when given an exercise that is not a number', () => {
+                const args = ['node', 'path', '4', '1', 'apple']
+                expect(() => exerciseCalculator.parseArguments(args)).toThrow('exercises must be numbers')
+            })
         })
-        test('should return an array of multiple exercises', () => {
-            const args = ['node', 'path', '1', '2','3','4','5']
-            const result = exerciseCalculator.parseArguments(args)
-            expect(result).toStrictEqual([1,2,3,4,5])
-            }
-        )
-        test('should throw an error when given an exercise that is not a number', () => {
-            const args = ['node', 'path', '1', 'apple']
-            expect( () => exerciseCalculator.parseArguments(args)).toThrow('exercise must be a number')
-        } )
     })
 })
