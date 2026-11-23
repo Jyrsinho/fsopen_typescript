@@ -1,5 +1,5 @@
 import {describe, expect, test} from 'vitest'
-import bmicalculator from '../bmicalculator'
+import bmicalculator from './../bmicalculator.ts'
 
 describe('bmicalculator', () => {
     test('Normal BMI gets evaluated normal', () => {
