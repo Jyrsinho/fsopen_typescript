@@ -9,7 +9,8 @@
   "scripts": {
     "test": "vitest run",
     "tsc": "tsc",
-    "bmiCalculator": "tsc && node bmicalculator.ts"
+    "bmiCalculator": "tsc && node bmicalculator.ts",
+    "exerciseCalculator": "tsc && node exerciseCalculator.ts"
   },
   "devDependencies": {
     "typescript": "^7.0.2",
