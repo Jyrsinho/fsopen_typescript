@@ -36,13 +36,14 @@ const parseArguments = (args : string[]): BMIValues => {
     }
 }
 
+if (process.argv[1] === import.meta.filename) {
+    try {
+        const {weight, height} = parseArguments(process.argv)
+        console.log(calculateBmi(height, weight))
 
-try {
-    const {weight, height} = parseArguments(process.argv)
-    console.log(calculateBmi(height, weight))
-
-} catch (e) {
-    console.error(e)
+    } catch (e) {
+        console.error(e)
+    }
 }
 
 
