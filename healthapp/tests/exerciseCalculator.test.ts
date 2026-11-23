@@ -1,5 +1,5 @@
 import {expect, test, describe, beforeEach} from 'vitest'
-import exerciseCalculator from '../exerciseCalculator'
+import exerciseCalculator from "./../exerciseCalculator.ts"
 
 describe('exerciseCalculator', () => {
     describe('periodlength', () => {
