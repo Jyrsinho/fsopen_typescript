@@ -1,5 +1,3 @@
-import {expect} from "vitest";
-
 const ORIGINAL_TARGET = 4
 
 interface Result  {
@@ -25,24 +23,35 @@ const analyzeRating = (trainingDays: number): 1 | 2 | 3 => {
 
 const countAverage = (exercises: number[]): number => {
     const sum = exercises.reduce( (acc: number, current: number) => acc + current , 0 )
-    console.log('sum', sum)
     return sum > 0 ? sum / exercises.length : 0
+}
+
+function generateRatingDescription(rating: 1 | 2 | 3): string {
+    switch (rating) {
+        case 1: return "Weak";
+        case 2: return "OK";
+        case 3: return "Excellent";
+    }
 }
 
 const calculateExercises = (exercises: number[]): Result => {
     const trainingDays = countTrainingDays(exercises)
     const rating = analyzeRating(trainingDays)
     const average = countAverage(exercises)
+    const ratingDescription = generateRatingDescription(rating)
 
     return {
         periodLength: exercises.length,
         trainingDays: trainingDays,
         success: trainingDays >= ORIGINAL_TARGET,
         rating: rating,
-        ratingDescription: 'OK',
+        ratingDescription,
         target: ORIGINAL_TARGET,
         average
     }
 }
+
+const exercises = [0,1,3,4]
+console.log(calculateExercises(exercises))
 
 export default { calculateExercises }
