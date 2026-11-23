@@ -82,4 +82,26 @@ describe('exerciseCalculator', () => {
             expect(result.average).toBe(1)
         })
     })
+    describe('parseArguments', () => {
+        test('should return array of one exercise when given one exercise', () => {
+            const args = ['node', 'path', '1']
+            const result = exerciseCalculator.parseArguments(args)
+            expect(result).toStrictEqual([1])
+        })
+        test('should return an array of two exercises', () => {
+            const args = ['node', 'path', '1', "2"]
+            const result = exerciseCalculator.parseArguments(args)
+            expect(result).toStrictEqual([1,2])
+        })
+        test('should return an array of multiple exercises', () => {
+            const args = ['node', 'path', '1', '2','3','4','5']
+            const result = exerciseCalculator.parseArguments(args)
+            expect(result).toStrictEqual([1,2,3,4,5])
+            }
+        )
+        test('should throw an error when given an exercise that is not a number', () => {
+            const args = ['node', 'path', '1', 'apple']
+            expect( () => exerciseCalculator.parseArguments(args)).toThrow('exercise must be a number')
+        } )
+    })
 })

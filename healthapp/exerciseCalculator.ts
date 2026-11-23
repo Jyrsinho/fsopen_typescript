@@ -51,7 +51,26 @@ const calculateExercises = (exercises: number[]): Result => {
     }
 }
 
-const exercises = [0,1,3,4]
-console.log(calculateExercises(exercises))
+function parseArguments(argv: string[]) : number[] {
+    const parsedArray = argv.slice(2)
+    const hasNonNumbers = parsedArray.some((value) => {
+        return isNaN(Number(value))
+    })
+    if (hasNonNumbers) {
+        throw new Error('exercise must be a number')
+    }
+    return parsedArray.map(value => parseInt(value))
+}
 
-export default { calculateExercises }
+try {
+    const exercises = parseArguments(process.argv)
+    console.log(calculateExercises(exercises))
+} catch (e) {
+    console.error(e)
+}
+
+
+export default {
+    calculateExercises,
+    parseArguments,
+}
