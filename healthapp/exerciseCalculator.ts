@@ -26,7 +26,7 @@ const analyzeRating = (trainingDays: number): 1 | 2 | 3 => {
 const countAverage = (exercises: number[]): number => {
     const sum = exercises.reduce( (acc: number, current: number) => acc + current , 0 )
     console.log('sum', sum)
-    return sum / exercises.length
+    return sum > 0 ? sum / exercises.length : 0
 }
 
 const calculateExercises = (exercises: number[]): Result => {

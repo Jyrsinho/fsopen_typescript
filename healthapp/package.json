@@ -7,7 +7,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "test",
+    "test": "vitest run",
     "tsc": "tsc",
     "bmiCalculator": "tsc && node bmicalculator.ts"
   },

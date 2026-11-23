@@ -73,7 +73,12 @@ describe('exerciseCalculator', () => {
         })
         test('should return the value of single instance in an array', () => {
             const exerciseArray = [1]
-            const result = exerciseCalculator.calculateExercises([])
+            const result = exerciseCalculator.calculateExercises(exerciseArray)
+            expect(result.average).toBe(1)
+        })
+        test('should return the average length of three instances in an array', () => {
+            const exerciseArray = [1, 2, 1, 0]
+            const result = exerciseCalculator.calculateExercises(exerciseArray)
             expect(result.average).toBe(1)
         })
     })
