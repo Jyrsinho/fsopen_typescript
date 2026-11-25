@@ -1,0 +1,16 @@
+{
+  "name": "patientor-backend",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "Jyri",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "tsc": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "^7.0.2"
+  }
+}
