@@ -1,0 +1,25 @@
+
+@baseUrl = localhost:3000/api
+
+# @name ping
+GET {{baseUrl}}/ping
+
+> {%
+    client.test("Status is 200", function() {
+        client.assert(response.status === 200, "Expected status 200");
+    });
+
+    client.test("Response is pong", function() {
+        client.assert(response.body === "pong", "Expected response to be pong");
+    });
+%}
+
+###
+# @name getDiagnosis
+GET {{baseUrl}}/diagnosis
+
+> {%
+client.test("Status is 200", function () {
+    client.assert(response.status == 200)
+})
+ %}
