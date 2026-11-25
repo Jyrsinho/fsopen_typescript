@@ -24,15 +24,18 @@ app.get('/bmi', (req, res) => {
     }));
 });
 
-app.post('/exercises', (req: Request, res: Response) => {
-     
+app.post('/exercises', (req , res ) => {
+
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const {exercises, originalTarget} = req.body;
 
     if ( !originalTarget || isNaN(Number(originalTarget)) ) {
         return res.status(400).send({ error: 'originalTarget must be a number' });
     }
 
-    res.send(JSON.stringify(exerciseCalculator.calculateExercises(Number(originalTarget), exercises)));
+    const exerciseReport = exerciseCalculator.calculateExercises(Number(originalTarget), exercises);
+
+    res.send(JSON.stringify(exerciseReport));
 });
 
 const PORT = 3003;

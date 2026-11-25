@@ -1,6 +1,4 @@
-let ORIGINAL_TARGET: number = 0;
-
-interface Result  {
+interface Result {
     periodLength: number,
     trainingDays: number,
     success: boolean,
@@ -8,63 +6,65 @@ interface Result  {
     ratingDescription: string,
     target: number,
     average: number
+}
 
+interface parserReturn {
+    exercises: number[],
+    target: number,
 }
 
 const countTrainingDays = (exercises: number[]): number => {
-    return exercises.filter( (e) => e > 0).length;
+    return exercises.filter((e) => e > 0).length;
 };
 
-const analyzeRating = (trainingDays: number): 1 | 2 | 3 => {
-    if (trainingDays < ORIGINAL_TARGET) return 1;
-    if (trainingDays === ORIGINAL_TARGET) return 2;
+const analyzeRating = (trainingDays: number, target: number): 1 | 2 | 3 => {
+    if (trainingDays < target) return 1;
+    if (trainingDays === target) return 2;
     return 3;
 };
 
 const countAverage = (exercises: number[]): number => {
-    const sum = exercises.reduce( (acc: number, current: number) => acc + current , 0 );
+    const sum = exercises.reduce((acc: number, current: number) => acc + current, 0);
     return sum > 0 ? sum / exercises.length : 0;
 };
 
 function generateRatingDescription(rating: 1 | 2 | 3): string {
     switch (rating) {
-        case 1: return "Weak";
-        case 2: return "OK";
-        case 3: return "Excellent";
+        case 1:
+            return "Weak";
+        case 2:
+            return "OK";
+        case 3:
+            return "Excellent";
     }
 }
 
-const setOriginalTarget = (originalTarget: number) => {
-    ORIGINAL_TARGET = originalTarget;
-};
 
-const calculateExercises = (exercises: number[]): Result => {
+const calculateExercises = (exercises: number[], target: number): Result => {
     const trainingDays = countTrainingDays(exercises);
-    const rating = analyzeRating(trainingDays);
+    const rating = analyzeRating(trainingDays, target);
     const average = countAverage(exercises);
     const ratingDescription = generateRatingDescription(rating);
 
     return {
         periodLength: exercises.length,
         trainingDays: trainingDays,
-        success: trainingDays >= ORIGINAL_TARGET,
+        success: trainingDays >= target,
         rating: rating,
         ratingDescription,
-        target: ORIGINAL_TARGET,
+        target,
         average
     };
 };
 
-function parseArguments(argv: string[]) : number[] {
+function parseArguments(argv: string[]): parserReturn {
     if (argv.length < 3) {
         throw new Error('Too few arguments');
     }
-    ORIGINAL_TARGET = Number(argv[2]);
-    if (isNaN(ORIGINAL_TARGET)) {
+    const target = Number(argv[2]);
+    if (isNaN(target)) {
         throw new Error('target must be a number');
     }
-    setOriginalTarget(ORIGINAL_TARGET);
-
     const parsedArray = argv.slice(3);
     const hasNonNumbers = parsedArray.some((value) => {
         return isNaN(Number(value));
@@ -72,20 +72,23 @@ function parseArguments(argv: string[]) : number[] {
     if (hasNonNumbers) {
         throw new Error('exercises must be numbers');
     }
-    ORIGINAL_TARGET = Number(argv[2]);
-    return parsedArray.map(value => parseInt(value));
+    return {
+        exercises: parsedArray.map(value => parseInt(value)),
+        target
+    };
 }
 
-try {
-    const exercises = parseArguments(process.argv);
-    console.log(calculateExercises(exercises));
-} catch (e) {
-    console.error(e);
+if (process.argv[1] === import.meta.filename) {
+    try {
+        const {exercises, target} = parseArguments(process.argv);
+        console.log(calculateExercises(exercises, target));
+    } catch (e) {
+        console.error(e);
+    }
 }
 
 
 export default {
     calculateExercises,
     parseArguments,
-    setOriginalTarget,
 };
