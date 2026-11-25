@@ -13,6 +13,7 @@ interface parserReturn {
     target: number,
 }
 
+
 const countTrainingDays = (exercises: number[]): number => {
     return exercises.filter((e) => e > 0).length;
 };
