@@ -12,13 +12,19 @@
     "test": "vitest run",
     "tsc": "tsc",
     "bmiCalculator": "tsc && node bmicalculator.ts",
-    "exerciseCalculator": "tsc && node exerciseCalculator.ts"
+    "exerciseCalculator": "tsc && node exerciseCalculator.ts",
+    "lint": "eslint",
+    "lint:fix": "eslint . --fix"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@stylistic/eslint-plugin": "^6.0.1",
     "@types/express": "^5.0.6",
     "@types/node": "^26.6.6",
     "concurrently": "^10.0.7",
-    "typescript": "^7.0.2",
+    "eslint": "^10.15.0",
+    "typescript": "npm:@typescript/typescript6@^6.0.2",
+    "typescript-eslint": "^8.74.0",
     "vitest": "^4.1.12"
   },
   "dependencies": {

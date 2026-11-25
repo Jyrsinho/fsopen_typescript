@@ -1,4 +1,4 @@
-type BMIEvaluation = 'Underweight' | 'Normal' | 'Overweight' | 'Obese'
+type BMIEvaluation = 'Underweight' | 'Normal' | 'Overweight' | 'Obese';
 
 interface BMIValues {
     weight: number,
@@ -6,17 +6,17 @@ interface BMIValues {
 }
 
 const evaluateBmi = (BMI: number): BMIEvaluation => {
-    if (BMI < 18.5) return 'Underweight'
-    if (BMI < 25) return 'Normal'
-    if (BMI < 30) return 'Overweight'
-    return 'Obese'
-}
+    if (BMI < 18.5) return 'Underweight';
+    if (BMI < 25) return 'Normal';
+    if (BMI < 30) return 'Overweight';
+    return 'Obese';
+};
 
 const calculateBmi = (height: number, weight: number): string => {
-    const heightInMetres = height / 100
-    const BMI = weight / (heightInMetres * heightInMetres)
-    console.log(BMI)
-    return `${evaluateBmi(BMI)} range`
+    const heightInMetres = height / 100;
+    const BMI = weight / (heightInMetres * heightInMetres);
+    console.log(BMI);
+    return `${evaluateBmi(BMI)} range`;
 };
 
 const parseArguments = (args : string[]): BMIValues => {
@@ -33,16 +33,16 @@ const parseArguments = (args : string[]): BMIValues => {
     return {
         weight,
         height
-    }
-}
+    };
+};
 
 if (process.argv[1] === import.meta.filename) {
     try {
-        const {weight, height} = parseArguments(process.argv)
-        console.log(calculateBmi(height, weight))
+        const {weight, height} = parseArguments(process.argv);
+        console.log(calculateBmi(height, weight));
 
     } catch (e) {
-        console.error(e)
+        console.error(e);
     }
 }
 
@@ -50,4 +50,4 @@ if (process.argv[1] === import.meta.filename) {
 export default {
     calculateBmi,
     parseArguments,
-}
+};
