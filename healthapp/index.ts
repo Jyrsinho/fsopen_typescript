@@ -7,7 +7,7 @@ app.use(express.json());
 
 app.get('/hello', (_req, res) => {
     console.log('hello');
-    res.send('Hello Full Stack');
+    res.send('Hello Full Stack!');
 });
 
 app.get('/bmi', (req, res) => {
@@ -15,7 +15,9 @@ app.get('/bmi', (req, res) => {
     const height = Number(req.query.height);
 
     if (isNaN(weight) || isNaN(height)) {
-        res.status(400).send('invalid parameters');
+        res.status(400).send({
+            error: 'malformatted parameters'
+        });
     }
 
     res.send(JSON.stringify({
@@ -32,19 +34,27 @@ app.post('/exercises', (req , res ) => {
     console.log('target', target);
 
     if (!target || !daily_exercises) {
-        return res.status(400).send('parameters missing');
+        return res.status(400).send({
+            error: 'parameters missing'
+        });
     }
 
     if ( isNaN(Number(target)) || !Array.isArray(daily_exercises) ) {
-        return res.status(400).send({ error: 'malformatted parameter' });
+        return res.status(400).send({ error: 'malformatted parameters' });
     }
 
-    const exerciseReport = exerciseCalculator.calculateExercises(daily_exercises as number[], Number(target));
+    if (!daily_exercises.every( (exercise) => typeof exercise === 'number')) {
+        return res.status(400).send({
+            error: 'malformatted parameters'
+        });
+    }
+
+    const exerciseReport = exerciseCalculator.calculateExercises(daily_exercises, Number(target));
 
     return res.send(JSON.stringify(exerciseReport));
 });
 
-const PORT = 3003;
+const PORT = 3000;
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
