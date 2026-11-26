@@ -1,4 +1,4 @@
-import {Gender, type NewPatient} from "../../types.ts";
+import {Gender, type NewPatient} from "../types.ts";
 import { z } from "zod";
 
 export const parseNewPatientEntry = (object: unknown): NewPatient => {
