@@ -1,7 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import express from "express";
 import patientService from "../services/patientServices.ts";
 import type {NewPatient} from "../../types.ts";
+import {parseNewPatientEntry} from "../utils/utils.ts";
 
 const router = express.Router();
 
@@ -11,7 +11,7 @@ router.get('/', (_req, res) => {
 } );
 
 router.post('/', (req, res) => {
-    const {name, dateOfBirth, ssn, gender, occupation } = req.body;
+    const {name, dateOfBirth, ssn, gender, occupation } = parseNewPatientEntry(req.body);
     const addedPatient : NewPatient = patientService.addPatient({
         name,
         dateOfBirth,
