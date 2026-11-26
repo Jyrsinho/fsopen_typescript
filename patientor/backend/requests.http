@@ -18,8 +18,10 @@ GET {{baseUrl}}/ping
 # @name getDiagnosis
 GET {{baseUrl}}/diagnosis
 
+client.log(JSON.stringify(response.body, null, 2));
+
 > {%
 client.test("Status is 200", function () {
-    client.assert(response.status == 200)
+    client.assert(response.status === 200)
 })
  %}
