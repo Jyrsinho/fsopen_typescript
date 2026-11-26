@@ -43,8 +43,8 @@ Content-Type: application/json
 
 {
   "name": "Kari Karila",
-  "dateOfBirth": "01-12-2020",
-  "ssn": "011220083A",
-  "gender": "Man",
+  "dateOfBirth": "2020-01-12",
+  "ssn": "011220A083A",
+  "gender": "male",
   "occupation": "software engineer"
 }
