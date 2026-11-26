@@ -1,5 +1,6 @@
 import patientData from './../../data/patients.ts';
-import type {NonSensitivePatient, Patient} from "../../types.ts";
+import type {NewPatient, NonSensitivePatient, Patient} from "../../types.ts";
+import { v4 as uuid } from 'uuid';
 
 const getNonSensitivePatients = ():NonSensitivePatient[] => {
     return patientData.map( ({id, name, gender, occupation, dateOfBirth}) => ({
@@ -15,9 +16,16 @@ const getAllPatients = ():Patient[] => {
     return patientData;
 };
 
-const addPatient = () => {
-    console.log('cannot add patients yet');
-    return null;
+const addPatient = (newPatient: NewPatient): Patient => {
+    const id = uuid();
+    const addedPatient = {
+        ...newPatient,
+        id
+    };
+    patientData.push(addedPatient);
+
+    return addedPatient;
+
 };
 
 export default {

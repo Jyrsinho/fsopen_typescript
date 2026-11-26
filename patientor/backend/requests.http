@@ -35,3 +35,16 @@ GET {{baseUrl}}/patients
         client.assert(response.status === 200)
     })
 %}
+
+###
+#@name postPatient
+POST {{baseUrl}}/patients
+Content-Type: application/json
+
+{
+  "name": "Kari Karila",
+  "dateOfBirth": "01-12-2020",
+  "ssn": "011220083A",
+  "gender": "Man",
+  "occupation": "software engineer"
+}
