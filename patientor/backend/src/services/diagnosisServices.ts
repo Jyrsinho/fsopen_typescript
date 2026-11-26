@@ -1,6 +1,7 @@
 import diagnosisData from './../../data/diagnosis.ts';
+import type {Diagnosis} from "../../types.ts";
 
-const getAllDiagnosis = () => {
+const getAllDiagnosis = ():Diagnosis[] => {
     return diagnosisData;
 };
 
