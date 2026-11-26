@@ -4,7 +4,7 @@ import patientServices from "../services/patientServices.ts";
 const router = express.Router();
 
 router.get('/', (_req, res) => {
-    const data = patientServices.getAllPatients();
+    const data = patientServices.getNonSensitivePatients();
     res.send(  data );
 } );
 
