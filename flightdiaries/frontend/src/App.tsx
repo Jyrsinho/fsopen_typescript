@@ -1,21 +1,25 @@
 import {useEffect, useState} from 'react'
-import axios from 'axios';
 import type {DiaryEntry, NewDiaryEntry} from './../../backend/src/types.ts';
-import {DiaryEntries} from "./DiaryEntries.tsx";
-import {DiaryForm} from "./DiaryForm.tsx";
+import {DiaryEntries} from "./components/DiaryEntries.tsx";
+import DiaryForm from "./components/DiaryForm.tsx";
+import diaryService from "./services/diaryService.ts";
 
 function App() {
     const [entries, setEntries] = useState<DiaryEntry[]>([])
 
     useEffect(() => {
-        axios.get<[]>('/api/diaries').then(response => {
-            console.log(response.data);
-            setEntries(response.data);
-        })
+        diaryService.getAll()
+            .then(initialEntries => {
+                setEntries(initialEntries)
+            })
     }, [])
 
     const addEntry = (newDiaryEntry: NewDiaryEntry) => {
-        console.log(newDiaryEntry)
+        console.log('viesti meni tänne addEntryyn')
+        diaryService.addDiaryEntry(newDiaryEntry)
+            .then((returnedDiaryEntry: DiaryEntry) => {
+                setEntries(entries.concat(returnedDiaryEntry))
+            });
     }
 
     return (

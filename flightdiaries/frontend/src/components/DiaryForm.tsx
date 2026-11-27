@@ -1,14 +1,10 @@
-import {type NewDiaryEntry, Weather} from "../../backend/src/types.ts"
-import {Visibility} from "../../backend/src/types.ts";
+import {type NewDiaryEntry, Weather} from "../../../backend/src/types.ts"
+import {Visibility} from "../../../backend/src/types.ts";
 import {useState} from "react";
+import * as React from "react";
 
 type DiaryFormProps = {
     addDiaryEntry: (newDiary: NewDiaryEntry) => void;
-}
-
-const formStyle = {
-    display: "flex",
-    flexDirection: "column",
 }
 
 export function DiaryForm({addDiaryEntry}: DiaryFormProps) {
@@ -24,19 +20,24 @@ export function DiaryForm({addDiaryEntry}: DiaryFormProps) {
     const [visibility, setVisibility] = useState<Visibility>(Visibility.Good);
     const [weather, setWeather] = useState<Weather>(Weather.Sunny)
 
-    console.log('Date', date);
 
-    const handleSubmit = () => {
+    const handleSubmit = (e: React.SubmitEvent) => {
+        e.preventDefault()
         addDiaryEntry({
             comment,
             date,
-            visibility: visibility,
+            visibility,
             weather
         })
+
+        setVisibility(Visibility.Good)
+        setWeather(Weather.Sunny)
+        setDate(dateString)
+        setComment('')
     }
 
     return (
-        <form style={formStyle} onSubmit={() => handleSubmit}>
+        <form style={{display: "flex", flexDirection: "column"}} onSubmit={(e) => handleSubmit(e)}>
             <legend>add diary entry:</legend>
             <label>comment:
                 <input onChange={(e) => setComment(e.target.value)}

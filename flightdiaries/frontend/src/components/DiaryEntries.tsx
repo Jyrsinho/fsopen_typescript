@@ -1,4 +1,4 @@
-import type {DiaryEntry} from './../../backend/src/types.ts';
+import type {DiaryEntry} from '../../../backend/src/types.ts';
 
 type DiaryEntriesProps = {
     entries: DiaryEntry[];
@@ -13,6 +13,7 @@ export function DiaryEntries({entries}: DiaryEntriesProps) {
                     <p><strong>{entry.date}</strong></p>
                     <p>weather: {entry.weather}</p>
                     <p>visibility: {entry.visibility}</p>
+                    <p>comment: {entry.comment}</p>
                 </div>))}
         </div>
     )
