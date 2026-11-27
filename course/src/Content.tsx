@@ -1,4 +1,5 @@
 import type {CoursePart} from "./types.ts";
+import {Part} from "./Part.tsx";
 
 interface ContentProps {
     courseParts: CoursePart[];
@@ -9,9 +10,7 @@ export function Content(props: ContentProps) {
     return (
         <div>
             {courseParts.map((coursePart: CoursePart) => {
-                    return <p key={coursePart.name}>
-                        {coursePart.name} {coursePart.exerciseCount}
-                    </p>
+                    return <Part key={coursePart.name} coursePart={coursePart}/>
                 }
             )}
         </div>
