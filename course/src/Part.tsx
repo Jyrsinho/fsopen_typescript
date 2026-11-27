@@ -8,6 +8,7 @@ export function Part(props: { coursePart: CoursePart }) {
             {props.coursePart.kind === "basic" && <p>description: {props.coursePart.description}</p>}
             {props.coursePart.kind === "group" && <p>number of group projects: {props.coursePart.groupProjectCount}</p>}
             {props.coursePart.kind === "background" && <p>background material: {props.coursePart.backgroundMaterial}</p>}
+            {props.coursePart.kind === 'special' && <p>required skills: {props.coursePart.requirements.join(', ')}</p>}
             <br></br>
         </div>
     )
