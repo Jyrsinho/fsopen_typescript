@@ -49,24 +49,14 @@ export function DiaryForm({addDiaryEntry}: DiaryFormProps) {
                 <input type={"date"} value={String(date)} onChange={(e) => setDate(e.target.value)}/>
             </label>
             <label htmlFor={"visibility-select"}>visibility:</label>
-            <select name="visibility"
-                    id="visibility-select"
+            <input  type={"text"} name="visibility"
                     value={visibility}
-                    onChange={(e) => setVisibility(e.target.value as Visibility)}>
-                {Object.entries(Visibility).map(([key, value]) => {
-                    return <option key={key} value={key}>{value}</option>
-                })}
-            </select>
+                    onChange={(e) => setVisibility(e.target.value as Visibility)}/>
             <label htmlFor="weather-select">weather:</label>
-            <select name="weather"
+            <input  name="weather"
                     id="weather-select"
                     value={weather}
-                    onChange={(e) => setWeather(e.target.value as Weather)}
-            >
-                {Object.entries(Weather).map(([key, value]) => {
-                    return <option key={key} value={key}>{value}</option>
-                })}
-            </select>
+                    onChange={(e) => setWeather(e.target.value as Weather)}/>
             <button type="submit">submit</button>
         </form>
     )

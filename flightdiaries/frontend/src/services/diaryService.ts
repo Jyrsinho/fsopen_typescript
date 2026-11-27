@@ -11,9 +11,14 @@ const getAll = () => {
 
 const addDiaryEntry = (object: NewDiaryEntry) => {
     console.log('newDiaryEntry', object)
-    return axios
-        .post(baseURL, object)
-        .then(response => response.data)
+    try {
+        return axios
+            .post(baseURL, object)
+            .then(response => response.data)
+    }catch (error) {
+        console.log(error)
+        return error
+    }
 }
 
 
